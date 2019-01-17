@@ -30,19 +30,19 @@ class QuestionDataPipeline(object):
     def close_spider(self, spider):
         # localSolutionSpider = LocalSolutionSpider()
         # localSolutionSpider.ParseLocalSolution()
-        file = open('./README', 'w')
-        file.write('| # | title | difficulty | topics | accepted | submission | accepted rate | likes | dislikes |\n')
+        file = open('./README.md', 'w')
+        file.write('| # | title | difficulty | topics | accepted rate |\n')
         file.write(
-            '| :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |\n')
+            '| :------: | :------: | :------: | :------: | :------: |\n')
         questions = self.mongo_collection.find().sort("id")
         for question in questions:
             print(question["id"])
-            topics = ""
-            for topic in question["topics"]:
-                topics += topic + ", "
-            topics = topics[:-2]
-            file.writelines(
-                ['| ', str(question["id"]), ' | ', str(question["title"]), ' | ', str(question["difficulty"]), ' | ',
-                 str(topics), ' | ', str(question["accepted"]), ' | ', str(question["submission"]), ' | ',
-                 str(question["ACrate"]), ' | ', str(question["likes"]), ' | ', str(question["dislikes"]), '\n'])
+            if question["id"]:
+                topics = ""
+                for topic in question["topics"]:
+                    topics += topic + ", "
+                topics = topics[:-2]
+                file.writelines(
+                    ['| ', str(question["id"]), ' | ', str(question["title"]), ' | ', str(question["difficulty"]), ' | ',
+                     str(topics), ' | ', str(question["ACrate"]), '\n'])
         file.close()
