@@ -44,3 +44,4 @@ class QuestionDataPipeline(object):
                 ['| ', str(question["id"]), ' | ', str(question["title"]), ' | ', str(question["difficulty"]), ' | ',
                  str(topics), ' | ', str(question["accepted"]), ' | ', str(question["submission"]), ' | ',
                  str(question["ACrate"]), ' | ', str(question["likes"]), ' | ', str(question["dislikes"]), '\n'])
+        file.close()
