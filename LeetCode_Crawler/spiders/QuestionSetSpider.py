@@ -22,6 +22,7 @@ class QuestionSetSpider(scrapy.Spider):
 
     def start_requests(self):
         yield scrapy.Request(url=self.urls[0], callback=self.ParseQuestionSet)
+        # yield scrapy.Request(url=self.urls[0], callback=self.Test)
 
     def ParseQuestionSet(self, response):
         questionSet = json.loads(response.text)
@@ -51,3 +52,6 @@ class QuestionSetSpider(scrapy.Spider):
         questionDataItem["submission"] = stats["totalSubmissionRaw"]
         questionDataItem["ACrate"] = stats["acRate"]
         yield questionDataItem
+
+    def Test(self, response):
+        pass

@@ -4,7 +4,7 @@ This project uses Scrapy framework and MongoDB to crawl question set from LeetCo
 - crawl question set from LeetCode
 - store questions in MongoDB
 - generate README.md
+- read local solution files to be integerated into markdown file
 
 ## To Do:
-- read local solution files to be integerated into markdown file
-- login to LeetCode
+- login

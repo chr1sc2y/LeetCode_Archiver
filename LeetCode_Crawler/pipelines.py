@@ -7,6 +7,7 @@
 
 import pymongo
 from LeetCode_Crawler.settings import mongo_collection, mongo_db, mongo_host, mongo_port
+from LeetCode_Crawler.spiders.LocalSolutionSpider import LocalSolutionSpider
 
 
 class QuestionDataPipeline(object):
@@ -19,11 +20,11 @@ class QuestionDataPipeline(object):
         questions = self.mongo_collection.find()
         for question in questions:
             self.question_set.add(question["id"])
-
         file = open('./README.md', 'w')
         file.write('| # | title | difficulty | topics | accepted | submission | accepted rate | likes | dislikes |\n')
         file.write(
             '| :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |\n')
+        file.close()
 
     def process_item(self, item, spider):
         data = dict(item)
@@ -32,16 +33,18 @@ class QuestionDataPipeline(object):
             self.mongo_collection.insert(data)
 
     def close_spider(self, spider):
+        # localSolutionSpider = LocalSolutionSpider()
+        # localSolutionSpider.ParseLocalSolution()
         questions = self.mongo_collection.find().sort("id")
-        file = open('./README.md', 'a')
-        for question in questions:
-            topics = ""
-            for topic in question["topics"]:
-                topics += topic + ", "
-            topics = topics[:-2]
-
-            file.writelines(
-                ['| ', str(question["id"]), ' | ', str(question["title"]), ' | ', str(question["difficulty"]), ' | ',
-                 str(topics), ' | ', str(question["accepted"]), ' | ', str(question["submission"]), ' | ',
-                 str(question["ACrate"]), ' | ', str(question["likes"]), ' | ', str(question["dislikes"]), '\n'])
+        with open('./README.md', 'a+') as file:
+            for question in questions:
+                topics = ""
+                for topic in question["topics"]:
+                    topics += topic + ", "
+                topics = topics[:-2]
+                file.writelines(
+                    ['| ', str(question["id"]), ' | ', str(question["title"]), ' | ', str(question["difficulty"]), ' | ',
+                     str(topics), ' | ', str(question["accepted"]), ' | ', str(question["submission"]), ' | ',
+                     str(question["ACrate"]), ' | ', str(question["likes"]), ' | ', str(question["dislikes"]), '\n'])
+                file.flush()
         file.close()
