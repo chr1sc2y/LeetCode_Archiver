@@ -14,7 +14,7 @@ class QuestionSetSpider(scrapy.Spider):
 
     name = 'QuestionSetSpider'
     allowed_domains = ['leetcode.com']
-    empty_url = "https://leetcode.com/"
+    base_url = "https://leetcode.com/"
     questionset_url = "https://leetcode.com/api/problems/all/"
     graphql_url = "https://leetcode.com/graphql"
     headers = {
@@ -29,9 +29,23 @@ class QuestionSetSpider(scrapy.Spider):
 
     question_payload = "{\n    \"operationName\": \"questionData\",\n    \"variables\": {\n        \"titleSlug\": \"QuestionName\"\n    },\n    \"query\": \"query questionData($titleSlug: String!) {\\n  question(titleSlug: $titleSlug) {\\n    questionId\\n    questionFrontendId\\n    boundTopicId\\n    title\\n    titleSlug\\n    content\\n    translatedTitle\\n    translatedContent\\n    isPaidOnly\\n    difficulty\\n    likes\\n    dislikes\\n    isLiked\\n    similarQuestions\\n    contributors {\\n      username\\n      profileUrl\\n      avatarUrl\\n      __typename\\n    }\\n    langToValidPlayground\\n    topicTags {\\n      name\\n      slug\\n      translatedName\\n      __typename\\n    }\\n    companyTagStats\\n    codeSnippets {\\n      lang\\n      langSlug\\n      code\\n      __typename\\n    }\\n    stats\\n    hints\\n    solution {\\n      id\\n      canSeeDetail\\n      __typename\\n    }\\n    status\\n    sampleTestCase\\n    metaData\\n    judgerAvailable\\n    judgeType\\n    mysqlSchemas\\n    enableRunCode\\n    enableTestMode\\n    envInfo\\n    __typename\\n  }\\n}\\n\"\n}\n"
 
+    def Login(self):
+        login_url = "https://leetcode.com/accounts/login/"
+        login_headers = {
+            "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'",
+            "referer": "https://leetcode.com/accounts/login/",  # necessary
+        }
+        self.session = requests.session()
+        result = self.session.get(login_url)
+        print(result)
+        data = {"login": "ZintrulCre", "password": "EXxw=+^d27jm7=of6E",
+                "csrfmiddlewaretoken": self.session.cookies['csrftoken']}
+        self.session.post(login_url, data=data, headers=login_headers)
+        print(result)
+
     def start_requests(self):
+        self.Login()
         yield scrapy.Request(url=self.questionset_url, callback=self.ParseQuestionSet)
-        yield scrapy.Request(url=self.empty_url, callback=self.ParseSubmission)
         # yield scrapy.Request(url=self.login_url, callback=self.Test)
 
     def ParseQuestionSet(self, response):
@@ -57,31 +71,59 @@ class QuestionSetSpider(scrapy.Spider):
             questionDataItem["topics"] = topics
         questionDataItem["difficulty"] = questionData["difficulty"]
         stats = json.loads(questionData["stats"])
-        questionDataItem["ACrate"] = stats["acRate"]
+        questionDataItem["ac_rate"] = stats["acRate"]
+        questionDataItem["likes"] = questionData["likes"]
+        questionDataItem["dislikes"] = questionData["dislikes"]
+        questionDataItem["slug"] = questionData["titleSlug"]
+        submission_list = self.GetSubmissionList(questionDataItem["slug"])
+        questionDataItem["submission_list"] = submission_list
+
         yield questionDataItem
 
-    def ParseSubmission(self, response):
-        login_url = "https://leetcode.com/accounts/login/"
-        login_headers = {
-            "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'",
-            "referer": "https://leetcode.com/accounts/login/",  # necessary
-        }
-
-        session = requests.session()
-        session.get(login_url)
-        data = {"login": "ZintrulCre", "password": "EXxw=+^d27jm7=of6E",
-                "csrfmiddlewaretoken": session.cookies['csrftoken']}
-        session.post(login_url, data=data, headers=login_headers)
-
-        submission_url = "https://leetcode.com/api/submissions/"
+    def GetSubmissionList(self, slug):
+        referer = "https://leetcode.com/problems/" + slug + "/"
         submission_headers = {
-            "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'"
+            "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'",
+            "content-type": "application/json",
+            "referer": referer
         }
+        submission_payload = "{\"operationName\":\"Submissions\",\"variables\":{\"offset\":0,\"limit\":20,\"lastKey\":null,\"questionSlug\":\"QuestionName\"},\"query\":\"query Submissions($offset: Int!, $limit: Int!, $lastKey: String, $questionSlug: String!) {\\n  submissionList(offset: $offset, limit: $limit, lastKey: $lastKey, questionSlug: $questionSlug) {\\n    lastKey\\n    hasNext\\n    submissions {\\n      id\\n      statusDisplay\\n      lang\\n      runtime\\n      timestamp\\n      url\\n      isPending\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"}"
+        submission_payload = submission_payload.replace("QuestionName", slug)
+        submissions = self.session.post(self.graphql_url, headers=submission_headers, data=submission_payload)
+        submissions = json.loads(submissions.text)
+        submission_list = {}
+        submissions = submissions["data"]["submissionList"]["submissions"]
+        for submission in submissions:
+            status = submission["statusDisplay"]
+            if status == "Accepted":
+                language = submission["lang"]
+                if language not in submission_list:
+                    url = "https://leetcode.com/" + submission["url"]
+                    submission_detail = self.session.get(url).text
+                    submission_code = submission_detail[
+                                      submission_detail.find("class Solution"):submission_detail.find("editCodeUrl") - 5]
+                    submission_code = self.HandleCode(submission_code)
+                    # todo: runtime
+                    # runtime = submission["runtime"]
+                    submission_list[language] = submission_code
+        return submission_list
 
-        submissionData = session.get(submission_url, headers=submission_headers)
-        submissionData = json.loads(submissionData.text)
-        file = open('./test.json', 'w')
-        file.write(str(submissionData))
+    def HandleCode(self, code):
+        # print(code)
+        code = code.replace('\\u000A', '\n')
+        code = code.replace('\\u0022', '"')
+        code = code.replace('\\u002D', '-')
+        code = code.replace('\\u003C', '<')
+        code = code.replace('\\u003E', '>')
+        code = code.replace('\\u003D', '=')
+        code = code.replace('\\u003B', ';')
+        code = code.replace('\\u0026', '&')
+        code = code.replace('\\u002A', '*')
+        # print(code)
+        return code
 
     def Test(self, response):
         pass
+
+# file = open('./test.json','w')
+# file.write()
