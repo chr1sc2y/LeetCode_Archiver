@@ -1,3 +1,4 @@
 .idea/
-.submissions/
-./.vscode/
+.vscode/
+submissions/
+LeetCode_Crawler/config.json

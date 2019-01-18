@@ -5,7 +5,7 @@ This project uses Scrapy framework and MongoDB to crawl questions and submission
 - crawl question set
 - crawl submissions
 - store questions and submissions in MongoDB
-- generate README.md
+- generate markdown file
 
 ---
 该项目使用Scrapy框架从LeetCode上爬取所有题目信息和自己的提交，保存在MongoDB中，并生成一个markdown文件。
@@ -20,8 +20,7 @@ This project uses Scrapy framework and MongoDB to crawl questions and submission
 ---
 
 ## Demo
-
-| # | title | submissions | topics | difficulty | accepted rate | likes | dislikes |
+| # | title | submissions | topics | difficulty | accepted rate | likes | dislikes |
 | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
 | 1 | Two Sum | [C++](../submissions/cpp/1.cpp) | Array, Hash Table | Easy | 39.9% | 9503 | 295
 | 2 | Add Two Numbers | [C++](../submissions/cpp/2.cpp) | Linked List, Math | Medium | 30.2% | 4331 | 1049
@@ -33,6 +32,3 @@ This project uses Scrapy framework and MongoDB to crawl questions and submission
 | 8 | String to Integer (atoi) |  | Math, String | Medium | 14.4% | 747 | 4838
 | 9 | Palindrome Number |  | Math | Easy | 41.0% | 1158 | 1172
 | 10 | Regular Expression Matching |  | String, Dynamic Programming, Backtracking | Hard | 24.8% | 2073 | 423
-
-| 1 | 2 |
-| :------: | :------: |
