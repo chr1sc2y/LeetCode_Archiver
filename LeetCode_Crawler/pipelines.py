@@ -29,31 +29,24 @@ class QuestionDataPipeline(object):
 
     def close_spider(self, spider):
         local_file = LocalFile()
+
+        # generate md file head
         file = open('./README.md', 'w')
         file.write('| # | title | submissions | topics | difficulty | accepted rate | likes | dislikes |\n')
         file.write(
             '| :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |\n')
+
         questions = self.mongo_collection.find().sort("id")
         for question in questions:
             if question["id"]:
-                local_file.Generate(question["id"], question["submission_list"])
+                # generate local file, submissions, topics
+                local_file.GenerateLocalFile(question["id"], question["submission_list"])
+                submissions = local_file.GenerateSubmissions(question["id"], question["submission_list"])
+                topics = local_file.GenerateTopics(question["topics"])
 
-                submissions = ""
-                for key in question["submission_list"]:
-                    submissions+=('[' + key + ']' + '(' + 'leetcode.com' + '), ')
-                submissions = submissions[:-2]
-
-                topics = ""
-                for topic in question["topics"]:
-                    topics += topic + ", "
-                topics = topics[:-2]
-
-                file.writelines(['| ', str(question["id"]), ' | ', str(question["title"]), ' | '])
-                question["submission_list"] = dict(question["submission_list"])
-
-                file.writelines(submissions)
-
-                file.writelines(
-                    [' | ', str(topics), ' | ', str(question["difficulty"]), ' | ', str(question["ac_rate"]), ' | ',
-                     str(question["likes"]), ' | ', str(question["dislikes"]), '\n'])
+                # generate md file
+                file.writelines(['| ', str(question["id"]), ' | ', str(question["title"]), ' | ' + submissions + ' | ',
+                                 str(topics), ' | ', str(question["difficulty"]), ' | ', str(question["ac_rate"]),
+                                 ' | ', str(question["likes"]), ' | ', str(question["dislikes"]), '\n'])
+                file.flush()
         file.close()

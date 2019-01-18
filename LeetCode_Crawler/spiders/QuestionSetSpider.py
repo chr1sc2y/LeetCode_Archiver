@@ -51,8 +51,8 @@ class QuestionSetSpider(scrapy.Spider):
     def ParseQuestionSet(self, response):
         questionSet = json.loads(response.text)
         questionSet = questionSet["stat_status_pairs"]
-        # for question in questionSet:
-        for question in questionSet[:10]:
+        for question in questionSet:
+        # for question in questionSet[:10]:
             titleSlug = question["stat"]["question__title_slug"]
             self.question_payload = self.question_payload.replace("QuestionName", titleSlug)
             yield scrapy.FormRequest(url=self.graphql_url, callback=self.ParseQuestionData,
