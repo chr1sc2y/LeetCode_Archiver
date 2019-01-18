@@ -17,6 +17,7 @@ class QuestionDataPipeline(object):
         self.mongo_db = mongo_client[mongo_db]
         self.mongo_collection = self.mongo_db[mongo_collection]
         self.question_set = set()
+        self.language_set = set()
         questions = self.mongo_collection.find()
         for question in questions:
             self.question_set.add(question["id"])
@@ -26,9 +27,12 @@ class QuestionDataPipeline(object):
         data["id"] = int(data["id"])
         if data["id"] not in self.question_set:
             self.mongo_collection.insert(data)
+            for language in data["submission_list"].keys():
+                if language not in self.language_set:
+                    self.language_set.add(language)
 
     def close_spider(self, spider):
-        local_file = LocalFile()
+        local_file = LocalFile(self.language_set)
 
         # generate md file head
         file = open('./README.md', 'w')
@@ -38,15 +42,14 @@ class QuestionDataPipeline(object):
 
         questions = self.mongo_collection.find().sort("id")
         for question in questions:
-            if question["id"]:
-                # generate local file, submissions, topics
-                local_file.GenerateLocalFile(question["id"], question["submission_list"])
-                submissions = local_file.GenerateSubmissions(question["id"], question["submission_list"])
-                topics = local_file.GenerateTopics(question["topics"])
+            # generate local file, submissions, topics
+            local_file.GenerateLocalFile(question["id"], question["submission_list"])
+            submissions = local_file.GenerateSubmissions(question["id"], question["submission_list"])
+            topics = local_file.GenerateTopics(question["topics"])
 
-                # generate md file
-                file.writelines(['| ', str(question["id"]), ' | ', str(question["title"]), ' | ' + submissions + ' | ',
-                                 str(topics), ' | ', str(question["difficulty"]), ' | ', str(question["ac_rate"]),
-                                 ' | ', str(question["likes"]), ' | ', str(question["dislikes"]), '\n'])
-                file.flush()
+            # generate md file
+            file.writelines(['| ', str(question["id"]), ' | ', str(question["title"]), ' | ' + submissions + ' | ',
+                             str(topics), ' | ', str(question["difficulty"]), ' | ', str(question["ac_rate"]),
+                             ' | ', str(question["likes"]), ' | ', str(question["dislikes"]), '\n'])
+            file.flush()
         file.close()

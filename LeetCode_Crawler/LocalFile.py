@@ -2,21 +2,18 @@ import os
 
 
 class LocalFile:
-    file_format = {"cpp": ".cpp", "python3": ".py", "python": ".py", "MySQL": ".sql"}
-    language_format = {"cpp": "C++", "python3": "Python3", "python": "Python", "MySQL": "MySQL"}
+    file_format = {"cpp": ".cpp", "python3": ".py", "python": ".py", "mysql": ".sql"}
+    language_format = {"cpp": "C++", "python3": "Python3", "python": "Python", "mysql": "MySQL"}
 
-    def __init__(self):
+    def __init__(self, language_set):
+        self.path = []
         self.root_path = "../submissions/"
-        self.cpp_path = self.root_path + "cpp/"
-        self.python_path = self.root_path + "python/"
-        self.python_path = self.root_path + "python3/"
-        self.sql_path = self.root_path + "MySQL/"
-        if not os.path.exists(self.root_path):
-            os.makedirs(self.root_path)
-        if not os.path.exists(self.cpp_path):
-            os.makedirs(self.cpp_path)
-        if not os.path.exists(self.python_path):
-            os.makedirs(self.python_path)
+        for language in language_set:
+            self.path.append(self.root_path + language + "/")
+        for path in self.path:
+            if not os.path.exists(path):
+                os.makedirs(path)
+
 
     def GenerateLocalFile(self, id, submission_list):
         submission_list = dict(submission_list)

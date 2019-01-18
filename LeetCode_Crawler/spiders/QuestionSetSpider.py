@@ -15,12 +15,7 @@ class QuestionSetSpider(scrapy.Spider):
     name = 'QuestionSetSpider'
     allowed_domains = ['leetcode.com']
     base_url = "https://leetcode.com/"
-    questionset_url = "https://leetcode.com/api/problems/all/"
     graphql_url = "https://leetcode.com/graphql"
-    headers = {
-        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'",
-        "content-type": "application/json"  # necessary
-    }
     submission_headers = {
         "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'",
         "referer": "https://leetcode.com/submissions/",  # necessary
@@ -45,19 +40,23 @@ class QuestionSetSpider(scrapy.Spider):
 
     def start_requests(self):
         self.Login()
-        yield scrapy.Request(url=self.questionset_url, callback=self.ParseQuestionSet)
+        questionset_url = "https://leetcode.com/api/problems/all/"
+        yield scrapy.Request(url=questionset_url, callback=self.ParseQuestionSet)
         # yield scrapy.Request(url=self.login_url, callback=self.Test)
 
     def ParseQuestionSet(self, response):
+        headers = {
+            "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'",
+            "content-type": "application/json"  # necessary
+        }
         questionSet = json.loads(response.text)
         questionSet = questionSet["stat_status_pairs"]
         for question in questionSet:
-        # for question in questionSet[:10]:
-            titleSlug = question["stat"]["question__title_slug"]
-            self.question_payload = self.question_payload.replace("QuestionName", titleSlug)
+            title_slug = question["stat"]["question__title_slug"]
+            self.question_payload = self.question_payload.replace("QuestionName", title_slug)
             yield scrapy.FormRequest(url=self.graphql_url, callback=self.ParseQuestionData,
-                                     headers=self.headers, body=self.question_payload)
-            self.question_payload = self.question_payload.replace(titleSlug, "QuestionName")
+                                     headers=headers, body=self.question_payload)
+            self.question_payload = self.question_payload.replace(title_slug, "QuestionName")
 
     def ParseQuestionData(self, response):
         questionData = json.loads(response.text)["data"]["question"]
@@ -68,7 +67,9 @@ class QuestionSetSpider(scrapy.Spider):
         topics = []
         for topic in questionData["topicTags"]:
             topics.append(topic["name"])
-            questionDataItem["topics"] = topics
+        if len(topics) == 0:
+            topics.append("None")
+        questionDataItem["topics"] = topics
         questionDataItem["difficulty"] = questionData["difficulty"]
         stats = json.loads(questionData["stats"])
         questionDataItem["ac_rate"] = stats["acRate"]
