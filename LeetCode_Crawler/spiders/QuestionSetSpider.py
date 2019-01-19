@@ -104,8 +104,6 @@ class QuestionSetSpider(scrapy.Spider):
                 if language not in submission_list:
                     url = "https://leetcode.com/" + submission["url"]
                     submission_detail = self.session.get(url).text
-                    file = open('./test.html','w')
-                    file.write(submission_detail)
                     submission_code = submission_detail[
                                       submission_detail.find("class Solution"):submission_detail.find("editCodeUrl") - 5]
                     submission_code = self.HandleCode(submission_code)
