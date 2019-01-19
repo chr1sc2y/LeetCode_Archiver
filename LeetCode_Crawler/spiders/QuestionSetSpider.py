@@ -16,13 +16,12 @@ class QuestionSetSpider(scrapy.Spider):
     allowed_domains = ['leetcode.com']
     base_url = "https://leetcode.com/"
     graphql_url = "https://leetcode.com/graphql"
-    submission_headers = {
-        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'",
-        "referer": "https://leetcode.com/submissions/",  # necessary
-        "content-type": "application/x-www-form-urlencoded"  # necessary
-    }
 
-    question_payload = "{\n    \"operationName\": \"questionData\",\n    \"variables\": {\n        \"titleSlug\": \"QuestionName\"\n    },\n    \"query\": \"query questionData($titleSlug: String!) {\\n  question(titleSlug: $titleSlug) {\\n    questionId\\n    questionFrontendId\\n    boundTopicId\\n    title\\n    titleSlug\\n    content\\n    translatedTitle\\n    translatedContent\\n    isPaidOnly\\n    difficulty\\n    likes\\n    dislikes\\n    isLiked\\n    similarQuestions\\n    contributors {\\n      username\\n      profileUrl\\n      avatarUrl\\n      __typename\\n    }\\n    langToValidPlayground\\n    topicTags {\\n      name\\n      slug\\n      translatedName\\n      __typename\\n    }\\n    companyTagStats\\n    codeSnippets {\\n      lang\\n      langSlug\\n      code\\n      __typename\\n    }\\n    stats\\n    hints\\n    solution {\\n      id\\n      canSeeDetail\\n      __typename\\n    }\\n    status\\n    sampleTestCase\\n    metaData\\n    judgerAvailable\\n    judgeType\\n    mysqlSchemas\\n    enableRunCode\\n    enableTestMode\\n    envInfo\\n    __typename\\n  }\\n}\\n\"\n}\n"
+    # submission_headers = {
+    #     "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'",
+    #     "referer": "https://leetcode.com/submissions/",  # necessary
+    #     "content-type": "application/x-www-form-urlencoded"  # necessary
+    # }
 
     def Login(self):
         login_url = "https://leetcode.com/accounts/login/"
@@ -32,11 +31,12 @@ class QuestionSetSpider(scrapy.Spider):
         }
         self.session = requests.session()
         result = self.session.get(login_url)
-        print(result)
-        data = {"login": "ZintrulCre", "password": "EXxw=+^d27jm7=of6E",
+        file = open('./config.json','r')
+        info = json.load(file)
+        data = {"login": info["username"], "password": info["password"],
                 "csrfmiddlewaretoken": self.session.cookies['csrftoken']}
         self.session.post(login_url, data=data, headers=login_headers)
-        print(result)
+        print("login info: " + str(result))
 
     def start_requests(self):
         self.Login()
@@ -45,18 +45,20 @@ class QuestionSetSpider(scrapy.Spider):
         # yield scrapy.Request(url=self.login_url, callback=self.Test)
 
     def ParseQuestionSet(self, response):
-        headers = {
+        question_url = "https://leetcode.com/graphql"
+        question_headers = {
             "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'",
             "content-type": "application/json"  # necessary
         }
+        question_payload = "{\n    \"operationName\": \"questionData\",\n    \"variables\": {\n        \"titleSlug\": \"QuestionName\"\n    },\n    \"query\": \"query questionData($titleSlug: String!) {\\n  question(titleSlug: $titleSlug) {\\n    questionId\\n    questionFrontendId\\n    boundTopicId\\n    title\\n    titleSlug\\n    content\\n    translatedTitle\\n    translatedContent\\n    isPaidOnly\\n    difficulty\\n    likes\\n    dislikes\\n    isLiked\\n    similarQuestions\\n    contributors {\\n      username\\n      profileUrl\\n      avatarUrl\\n      __typename\\n    }\\n    langToValidPlayground\\n    topicTags {\\n      name\\n      slug\\n      translatedName\\n      __typename\\n    }\\n    companyTagStats\\n    codeSnippets {\\n      lang\\n      langSlug\\n      code\\n      __typename\\n    }\\n    stats\\n    hints\\n    solution {\\n      id\\n      canSeeDetail\\n      __typename\\n    }\\n    status\\n    sampleTestCase\\n    metaData\\n    judgerAvailable\\n    judgeType\\n    mysqlSchemas\\n    enableRunCode\\n    enableTestMode\\n    envInfo\\n    __typename\\n  }\\n}\\n\"\n}\n"
         questionSet = json.loads(response.text)
         questionSet = questionSet["stat_status_pairs"]
         for question in questionSet:
             title_slug = question["stat"]["question__title_slug"]
-            self.question_payload = self.question_payload.replace("QuestionName", title_slug)
-            yield scrapy.FormRequest(url=self.graphql_url, callback=self.ParseQuestionData,
-                                     headers=headers, body=self.question_payload)
-            self.question_payload = self.question_payload.replace(title_slug, "QuestionName")
+            question_payload = question_payload.replace("QuestionName", title_slug)
+            yield scrapy.FormRequest(url=question_url, callback=self.ParseQuestionData,
+                                     headers=question_headers, body=question_payload)
+            question_payload = question_payload.replace(title_slug, "QuestionName")
 
     def ParseQuestionData(self, response):
         questionData = json.loads(response.text)["data"]["question"]
@@ -81,6 +83,7 @@ class QuestionSetSpider(scrapy.Spider):
 
         yield questionDataItem
 
+    # Get latest submissions
     def GetSubmissionList(self, slug):
         referer = "https://leetcode.com/problems/" + slug + "/"
         submission_headers = {
@@ -101,6 +104,8 @@ class QuestionSetSpider(scrapy.Spider):
                 if language not in submission_list:
                     url = "https://leetcode.com/" + submission["url"]
                     submission_detail = self.session.get(url).text
+                    file = open('./test.html','w')
+                    file.write(submission_detail)
                     submission_code = submission_detail[
                                       submission_detail.find("class Solution"):submission_detail.find("editCodeUrl") - 5]
                     submission_code = self.HandleCode(submission_code)
@@ -125,6 +130,3 @@ class QuestionSetSpider(scrapy.Spider):
 
     def Test(self, response):
         pass
-
-# file = open('./test.json','w')
-# file.write()
