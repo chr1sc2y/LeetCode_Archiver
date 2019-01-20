@@ -1,6 +1,15 @@
-This project uses Scrapy framework to crawl questions and submissions from LeetCode and MongoDB to store information, and generate a markdown file.
+## LeetCode Crawler
 
-## Done:
+This project uses Scrapy framework to crawl questions and submissions from LeetCode and MongoDB to store information, and generate a markdown file.
+Make sure you have Python3 and MongoDB environment before use.
+
+## How to use
+- ```mongod```
+- enter ./LeetCode_Crawler
+- new a file config.json and config your username and password in it, refer to config_template.json
+- ```python3 main.py```
+
+## Done
 - login
 - crawl question set
 - crawl submissions
@@ -15,9 +24,17 @@ This project uses Scrapy framework to crawl questions and submissions from LeetC
 
 ---
 
+## LeetCode爬虫
+
 该项目使用Scrapy框架从LeetCode上爬取所有题目信息和自己的提交，保存在MongoDB中，并生成一个markdown文件。
 
-## 功能:
+## 使用
+- ```mongod```
+- 进入 ./LeetCode_Crawler
+- 新建config.json，配置你的用户名和密码，参照config_template.json
+- ```python3 main.py```
+
+## 功能
 - 登录
 - 爬取所有题目信息
 - 爬取自己的提交
