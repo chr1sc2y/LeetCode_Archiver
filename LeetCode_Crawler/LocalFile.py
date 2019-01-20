@@ -29,11 +29,11 @@ class LocalFile:
         time = self.GetTime()
         file = open(self.root_path + 'README.md', 'w')
         file.write(
-            "![logo](https://theme.zdassets.com/theme_assets/9008406/036323c6afd10392aa5b7e3a2eb7557d17955c81.png)\n")
-        file.write("## <center><strong>LeetCode Solutions</strong></center>\n")
-        file.write("#### <center>Last Updated: " + time + "</center>\n")
+            '<p align="center"><img src="https://theme.zdassets.com/theme_assets/9008406/036323c6afd10392aa5b7e3a2eb7557d17955c81.png"></p>')
+        file.write("<h3 align='center'><strong>LeetCode Solutions</strong></center></h2>")
+        file.write('<p align="center">Last Updated: ' + time + '</p>')
         file.write(
-            "### <center>Crawled by [ZintrulCre/LeetCode_Crawler](https://github.com/ZintrulCre/LeetCode_Crawler)</center>\n\n")
+            '<p align="center">Crawled by <a href = "https://github.com/ZintrulCre/LeetCode_Crawler">ZintrulCre/LeetCode_Crawler</a></p>')
 
         file.write('| # | title | submissions | topics | difficulty | accepted rate | likes | dislikes |\n')
         file.write(
@@ -79,7 +79,7 @@ class LocalFile:
         submissions = ""
         for language in submission_list:
             submissions += '[' + self.language_format[language] + ']' + \
-                           '(https://github.com/ZintrulCre/LeetCode/blob/master/' + language + "/"\
+                           '(https://github.com/ZintrulCre/LeetCode/blob/master/' + language + "/" \
                            + str(id) + self.file_format[language] + '), '
         submissions = submissions[:-2]
         return submissions
