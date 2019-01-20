@@ -1,4 +1,4 @@
-This project uses Scrapy framework and MongoDB to crawl questions and submissions from LeetCode, and generate a markdown file.
+This project uses Scrapy framework to crawl questions and submissions from LeetCode and MongoDB to store information, and generate a markdown file.
 
 ## Done:
 - login
