@@ -36,5 +36,5 @@ class QuestionDataPipeline(object):
 
     def close_spider(self, spider):
         local_file = LocalFile()
-        local_file.GenerateSolutionFolders(self.language_set)
-        local_file.GenerateREADME()
+        local_file.GenerateFolders(self.language_set)
+        local_file.GenerateFiles()

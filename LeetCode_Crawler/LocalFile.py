@@ -13,7 +13,7 @@ class LocalFile:
         self.mongo_db = mongo_client[mongo_db]
         self.mongo_collection = self.mongo_db[mongo_collection]
 
-    def GenerateSolutionFolders(self, language_set):
+    def GenerateFolders(self, language_set):
         self.path = []
         self.root_path = "../../LeetCode/"
         if not os.path.exists(self.root_path):
@@ -24,14 +24,16 @@ class LocalFile:
             if not os.path.exists(path):
                 os.makedirs(path)
 
-    def GenerateREADME(self):
+    def GenerateFiles(self):
         # generate md file head
         time = self.GetTime()
         file = open(self.root_path + 'README.md', 'w')
-        file.write("![logo](https://theme.zdassets.com/theme_assets/9008406/036323c6afd10392aa5b7e3a2eb7557d17955c81.png)\n")
+        file.write(
+            "![logo](https://theme.zdassets.com/theme_assets/9008406/036323c6afd10392aa5b7e3a2eb7557d17955c81.png)\n")
         file.write("## <center><strong>LeetCode Solutions</strong></center>\n")
-        file.write("#### <center>Last Updated: " + time +"</center>\n")
-        file.write("### <center>Crawled by [ZintrulCre/LeetCode_Crawler](https://github.com/ZintrulCre/LeetCode_Crawler)</center>\n\n")
+        file.write("#### <center>Last Updated: " + time + "</center>\n")
+        file.write(
+            "### <center>Crawled by [ZintrulCre/LeetCode_Crawler](https://github.com/ZintrulCre/LeetCode_Crawler)</center>\n\n")
 
         file.write('| # | title | submissions | topics | difficulty | accepted rate | likes | dislikes |\n')
         file.write(
@@ -76,9 +78,9 @@ class LocalFile:
     def GenerateSubmissions(self, id, submission_list):
         submissions = ""
         for language in submission_list:
-            submissions += '[' + self.language_format[language] + ']' + '(' + self.root_path + language + "/" + str(
-                id) + \
-                           self.file_format[language] + '), '
+            submissions += '[' + self.language_format[language] + ']' + \
+                           '(https://github.com/ZintrulCre/LeetCode/blob/master/' + language + "/"\
+                           + str(id) + self.file_format[language] + '), '
         submissions = submissions[:-2]
         return submissions
 
