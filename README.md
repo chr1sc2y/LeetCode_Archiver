@@ -28,22 +28,23 @@ This project uses Scrapy framework to crawl questions and submissions from LeetC
 
 ## Demo
 
-![logo](https://theme.zdassets.com/theme_assets/9008406/036323c6afd10392aa5b7e3a2eb7557d17955c81.png)
-## <center><strong>LeetCode Solutions</strong></center>
-#### <center>Last Updated: 2019-1-19 12:10:9</center>
-### <center>Crawled by [ZintrulCre/LeetCode_Crawler](https://github.com/ZintrulCre/LeetCode_Crawler)</center>
+<p align="center"><img src="https://theme.zdassets.com/theme_assets/9008406/036323c6afd10392aa5b7e3a2eb7557d17955c81.png"></p>
+<h3 align="center"><strong>LeetCode Solutions</strong></center></h2>
+<p align="center">Last Updated: 2019-1-20 20:24:52</p>
+<p align="center">Crawled by <a href = "https://github.com/ZintrulCre/LeetCode_Crawler">ZintrulCre/LeetCode_Crawler</a></p>
 
 | # | title | submissions | topics | difficulty | accepted rate | likes | dislikes |
 | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
-| 976 | Largest Perimeter Triangle | [Python3](../../LeetCode/python3/976.py), [C++](../../LeetCode/cpp/976.cpp) | Array, Math | Easy | 55.7% | 52 | 6
-| 974 | Subarray Sums Divisible by K | [C++](../../LeetCode/cpp/974.cpp), [Python3](../../LeetCode/python3/974.py) | Array | Medium | 37.3% | 100 | 4
-| 973 | K Closest Points to Origin | [Python3](../../LeetCode/python3/973.py), [C++](../../LeetCode/cpp/973.cpp) | Math, Divide and Conquer, Sort | Easy | 68.3% | 56 | 11
-| 971 | Flip Binary Tree To Match Preorder Traversal | [C++](../../LeetCode/cpp/971.cpp) | Tree, Depth-first Search | Medium | 41.6% | 55 | 27
-| 970 | Powerful Integers | [Python3](../../LeetCode/python3/970.py), [C++](../../LeetCode/cpp/970.cpp) | Math | Easy | 38.5% | 28 | 51
-| 969 | Pancake Sorting | [Python3](../../LeetCode/python3/969.py), [C++](../../LeetCode/cpp/969.cpp) | Array, Sort | Medium | 62.2% | 59 | 61
-| 967 | Numbers With Same Consecutive Differences | [Python3](../../LeetCode/python3/967.py), [C++](../../LeetCode/cpp/967.cpp) | Dynamic Programming | Medium | 35.3% | 53 | 9
-| 966 | Vowel Spellchecker | [Python3](../../LeetCode/python3/966.py), [C++](../../LeetCode/cpp/966.cpp) | Hash Table, String | Medium | 37.4% | 40 | 75
-| 965 | Univalued Binary Tree | [C++](../../LeetCode/cpp/965.cpp), [Python3](../../LeetCode/python3/965.py) | Tree | Easy | 69.6% | 64 | 16
-| 962 | Maximum Width Ramp | [C++](../../LeetCode/cpp/962.cpp) | Array | Medium | 37.5% | 149 | 6
-| 961 | N-Repeated Element in Size 2N Array | [C++](../../LeetCode/cpp/961.cpp) | Hash Table | Easy | 73.4% | 65 | 61
-| 958 | Check Completeness of a Binary Tree | [C++](../../LeetCode/cpp/958.cpp) | Tree | Medium | 45.3% | 96 | 3
+| 979 | Distribute Coins in Binary Tree | [Python3](https://github.com/ZintrulCre/LeetCode/blob/master/python3/979.py), [C++](https://github.com/ZintrulCre/LeetCode/blob/master/cpp/979.cpp) | Tree, Depth-first Search | Medium | 63.2% | 55 | 1
+| 978 | Longest Turbulent Subarray | [C++](https://github.com/ZintrulCre/LeetCode/blob/master/cpp/978.cpp), [Python3](https://github.com/ZintrulCre/LeetCode/blob/master/python3/978.py) | Array | Medium | 45.9% | 15 | 5
+| 977 | Squares of a Sorted Array | [C++](https://github.com/ZintrulCre/LeetCode/blob/master/cpp/977.cpp), [Python3](https://github.com/ZintrulCre/LeetCode/blob/master/python3/977.py) | Array, Two Pointers, Sort | Easy | 83.0% | 10 | 4
+| 976 | Largest Perimeter Triangle | [Python3](https://github.com/ZintrulCre/LeetCode/blob/master/python3/976.py), [C++](https://github.com/ZintrulCre/LeetCode/blob/master/cpp/976.cpp) | Array, Math | Easy | 55.8% | 54 | 6
+| 974 | Subarray Sums Divisible by K | [C++](https://github.com/ZintrulCre/LeetCode/blob/master/cpp/974.cpp), [Python3](https://github.com/ZintrulCre/LeetCode/blob/master/python3/974.py) | Array | Medium | 37.6% | 104 | 4
+| 973 | K Closest Points to Origin | [Python3](https://github.com/ZintrulCre/LeetCode/blob/master/python3/973.py), [C++](https://github.com/ZintrulCre/LeetCode/blob/master/cpp/973.cpp) | Math, Divide and Conquer, Sort | Easy | 67.9% | 59 | 12
+| 971 | Flip Binary Tree To Match Preorder Traversal | [C++](https://github.com/ZintrulCre/LeetCode/blob/master/cpp/971.cpp) | Tree, Depth-first Search | Medium | 41.8% | 56 | 27
+| 970 | Powerful Integers | [Python3](https://github.com/ZintrulCre/LeetCode/blob/master/python3/970.py), [C++](https://github.com/ZintrulCre/LeetCode/blob/master/cpp/970.cpp) | Math | Easy | 38.5% | 28 | 56
+| 969 | Pancake Sorting | [Python3](https://github.com/ZintrulCre/LeetCode/blob/master/python3/969.py), [C++](https://github.com/ZintrulCre/LeetCode/blob/master/cpp/969.cpp) | Array, Sort | Medium | 62.2% | 60 | 63
+| 967 | Numbers With Same Consecutive Differences | [Python3](https://github.com/ZintrulCre/LeetCode/blob/master/python3/967.py), [C++](https://github.com/ZintrulCre/LeetCode/blob/master/cpp/967.cpp) | Dynamic Programming | Medium | 35.4% | 53 | 9
+| 966 | Vowel Spellchecker | [Python3](https://github.com/ZintrulCre/LeetCode/blob/master/python3/966.py), [C++](https://github.com/ZintrulCre/LeetCode/blob/master/cpp/966.cpp) | Hash Table, String | Medium | 37.5% | 41 | 76
+| 965 | Univalued Binary Tree | [C++](https://github.com/ZintrulCre/LeetCode/blob/master/cpp/965.cpp), [Python3](https://github.com/ZintrulCre/LeetCode/blob/master/python3/965.py) | Tree | Easy | 69.5% | 64 | 16
+| 962 | Maximum Width Ramp | [C++](https://github.com/ZintrulCre/LeetCode/blob/master/cpp/962.cpp) | Array | Medium | 37.6% | 150 | 6
