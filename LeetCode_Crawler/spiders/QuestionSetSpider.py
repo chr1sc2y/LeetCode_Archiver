@@ -17,21 +17,16 @@ class QuestionSetSpider(scrapy.Spider):
     base_url = "https://leetcode.com/"
     graphql_url = "https://leetcode.com/graphql"
 
-    # submission_headers = {
-    #     "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'",
-    #     "referer": "https://leetcode.com/submissions/",  # necessary
-    #     "content-type": "application/x-www-form-urlencoded"  # necessary
-    # }
-
     def Login(self):
         login_url = "https://leetcode.com/accounts/login/"
         login_headers = {
             "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'",
-            "referer": "https://leetcode.com/accounts/login/",  # necessary
+            "referer": "https://leetcode.com/accounts/login/",
+            # "content-type": "multipart/form-data; boundary=----WebKitFormBoundary70YlQBtroATwu9Jx"    # bug
         }
         self.session = requests.session()
         result = self.session.get(login_url)
-        file = open('./config.json','r')
+        file = open('./config.json', 'r')
         info = json.load(file)
         data = {"login": info["username"], "password": info["password"],
                 "csrfmiddlewaretoken": self.session.cookies['csrftoken']}
@@ -42,7 +37,6 @@ class QuestionSetSpider(scrapy.Spider):
         self.Login()
         questionset_url = "https://leetcode.com/api/problems/all/"
         yield scrapy.Request(url=questionset_url, callback=self.ParseQuestionSet)
-        # yield scrapy.Request(url=self.login_url, callback=self.Test)
 
     def ParseQuestionSet(self, response):
         question_url = "https://leetcode.com/graphql"
@@ -105,7 +99,8 @@ class QuestionSetSpider(scrapy.Spider):
                     url = "https://leetcode.com/" + submission["url"]
                     submission_detail = self.session.get(url).text
                     submission_code = submission_detail[
-                                      submission_detail.find("class Solution"):submission_detail.find("editCodeUrl") - 5]
+                                      submission_detail.find("class Solution"):submission_detail.find(
+                                          "editCodeUrl") - 5]
                     submission_code = self.HandleCode(submission_code)
                     # todo: runtime
                     # runtime = submission["runtime"]
@@ -125,6 +120,3 @@ class QuestionSetSpider(scrapy.Spider):
         code = code.replace('\\u002A', '*')
         # print(code)
         return code
-
-    def Test(self, response):
-        pass
