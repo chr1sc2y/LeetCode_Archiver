@@ -1,17 +1,13 @@
 import os
 import time
-import pymongo
-from LeetCode_Crawler.settings import mongo_collection, mongo_db, mongo_host, mongo_port
 
 
 class LocalFile:
     file_format = {"cpp": ".cpp", "python3": ".py", "python": ".py", "mysql": ".sql"}
     language_format = {"cpp": "C++", "python3": "Python3", "python": "Python", "mysql": "MySQL"}
 
-    def __init__(self):
-        mongo_client = pymongo.MongoClient(mongo_host, mongo_port)
-        self.mongo_db = mongo_client[mongo_db]
-        self.mongo_collection = self.mongo_db[mongo_collection]
+    def __init__(self, data_set):
+        self.data_set = data_set
 
     def GenerateFolders(self, language_set):
         self.path = []
@@ -33,13 +29,13 @@ class LocalFile:
         file.write("<h3 align='center'><strong>LeetCode Solutions</strong></center></h2>")
         file.write('<p align="center">Last Updated: ' + time + '</p>')
         file.write(
-            '<p align="center">Crawled by <a href = "https://github.com/ZintrulCre/LeetCode_Crawler">ZintrulCre/LeetCode_Crawler</a></p>')
+            '<p align="center">Crawled by <a href = "https://github.com/ZintrulCre/LeetCode_Crawler">ZintrulCre/LeetCode_Crawler</a></p>\n\n')
 
         file.write('| # | title | submissions | topics | difficulty | accepted rate | likes | dislikes |\n')
         file.write(
             '| :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |\n')
 
-        questions = self.mongo_collection.find().sort("id", -1)
+        questions = sorted(self.data_set, key=lambda x: x["id"], reverse=True)
         for question in questions:
             # generate local file, submissions, topics
             self.GenerateSolutionFile(question["id"], question["submission_list"])
