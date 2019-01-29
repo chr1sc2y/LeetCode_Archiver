@@ -99,7 +99,7 @@ class QuestionSetSpider(scrapy.Spider):
                     url = "https://leetcode.com/" + submission["url"]
                     submission_detail = self.session.get(url).text
                     submission_code = submission_detail[
-                                      submission_detail.find("class Solution"):submission_detail.find(
+                                      submission_detail.find("submissionCode") + 17:submission_detail.find(
                                           "editCodeUrl") - 5]
                     submission_code = self.HandleCode(submission_code)
                     # todo: runtime
@@ -108,7 +108,7 @@ class QuestionSetSpider(scrapy.Spider):
         return submission_list
 
     def HandleCode(self, code):
-        # print(code)
+        code = code.replace('\\u0009', '\t')
         code = code.replace('\\u000A', '\n')
         code = code.replace('\\u0022', '"')
         code = code.replace('\\u002D', '-')
@@ -118,5 +118,4 @@ class QuestionSetSpider(scrapy.Spider):
         code = code.replace('\\u003B', ';')
         code = code.replace('\\u0026', '&')
         code = code.replace('\\u002A', '*')
-        # print(code)
         return code

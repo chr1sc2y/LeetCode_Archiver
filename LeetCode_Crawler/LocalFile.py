@@ -3,8 +3,16 @@ import time
 
 
 class LocalFile:
-    file_format = {"cpp": ".cpp", "python3": ".py", "python": ".py", "mysql": ".sql"}
-    language_format = {"cpp": "C++", "python3": "Python3", "python": "Python", "mysql": "MySQL"}
+    file_format = {"cpp": ".cpp", "python3": ".py",
+                   "python": ".py", "mysql": ".sql",
+                   "golang": ".go", "java": ".java",
+                   "c": ".c", "javascript": ".js",
+                   "php": ".php"}
+    language_format = {"cpp": "C++", "python3": "Python3",
+                       "python": "Python", "mysql": "MySQL",
+                       "golang": "Golang", "java": "Java",
+                       "c": "C", "javascript": "JavaScript",
+                       "php": "PHP"}
 
     def __init__(self, data_set):
         self.data_set = data_set
@@ -26,20 +34,24 @@ class LocalFile:
         file = open(self.root_path + 'README.md', 'w')
         file.write(
             '<p align="center"><img src="https://theme.zdassets.com/theme_assets/9008406/036323c6afd10392aa5b7e3a2eb7557d17955c81.png"></p>')
-        file.write("<h3 align='center'><strong>LeetCode Solutions</strong></center></h2>")
+        file.write(
+            "<h3 align='center'><strong>LeetCode Solutions</strong></center></h3>")
         file.write('<p align="center">Last Updated: ' + time + '</p>')
         file.write(
             '<p align="center">Crawled by <a href = "https://github.com/ZintrulCre/LeetCode_Crawler">ZintrulCre/LeetCode_Crawler</a></p>\n\n')
 
-        file.write('| # | title | submissions | topics | difficulty | accepted rate | likes | dislikes |\n')
+        file.write(
+            '| # | title | submissions | topics | difficulty | accepted rate | likes | dislikes |\n')
         file.write(
             '| :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |\n')
 
         questions = sorted(self.data_set, key=lambda x: x["id"], reverse=True)
         for question in questions:
             # generate local file, submissions, topics
-            self.GenerateSolutionFile(question["id"], question["submission_list"])
-            submissions = self.GenerateSubmissions(question["id"], question["submission_list"])
+            self.GenerateSolutionFile(
+                question["id"], question["submission_list"])
+            submissions = self.GenerateSubmissions(
+                question["id"], question["submission_list"])
             if submissions == "":
                 continue
             topics = self.GenerateTopics(question["topics"])
@@ -47,7 +59,8 @@ class LocalFile:
 
             # generate md file
             file.writelines(['| ', str(question["id"]), ' | ', str(question["title"]), ' | ' + submissions + ' | ',
-                             str(topics), ' | ', str(question["difficulty"]), ' | ', str(question["ac_rate"]),
+                             str(topics), ' | ', str(question["difficulty"]), ' | ', str(
+                    question["ac_rate"]),
                              ' | ', str(question["likes"]), ' | ', str(question["dislikes"]), '\n'])
             file.flush()
         file.close()
@@ -66,7 +79,8 @@ class LocalFile:
         submission_list = dict(submission_list)
         if submission_list:
             for language in submission_list.keys():
-                file = open(self.root_path + language + '/' + str(id) + self.file_format[language], 'w')
+                file = open(self.root_path + language + '/' +
+                            str(id) + self.file_format[language], 'w')
                 file.write(submission_list[language])
                 file.flush()
                 file.close()
@@ -75,7 +89,7 @@ class LocalFile:
         submissions = ""
         for language in submission_list:
             submissions += '[' + self.language_format[language] + ']' + \
-                           '(https://github.com/ZintrulCre/LeetCode/blob/master/' + language + "/" \
+                           self.root_path + language + "/" \
                            + str(id) + self.file_format[language] + '), '
         submissions = submissions[:-2]
         return submissions
