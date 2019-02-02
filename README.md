@@ -1,19 +1,33 @@
-## LeetCode Crawler
+# LeetCode Crawler
 
-This project uses Scrapy framework to crawl questions and submissions from LeetCode and generate a markdown file.
+This project uses Scrapy framework to crawl questions and submissions from LeetCode, and generates a markdown file. 
 
-## How to use
+### Programming languages currently supported
+
+- C++, C, Rust, Golang, C#, Swift
+- Java, Kotlin, Scala
+- Python3, Python, Ruby, JavaScript, PHP
+- MySQL
+
+### How to use
+
 - enter ./LeetCode_Crawler
-- new a file config.json and config your username and password in it, refer to config_template.json
+- create a file config.json where you config your username and password refering to config_template.json
+```
+{
+  "username": "xxxx",
+  "password": "xxxx"
+}
+```
 - ```python3 main.py```
 
-## Done
-- login
-- crawl question set
-- crawl submissions
-- generate markdown file
+### Done
 
-## Thanks to
+- login, and crawl all submissions
+- generate a markdown file
+
+### Thanks to
+
 - <a href="https://github.com/Excited-ccccly">Lingyun Chen</a>
 - <a href="https://github.com/Ma63d">Chuck Liu</a>
 - <a href="https://github.com/nusr/leetcode-spider">nusr/leetcode-spider</a>
@@ -21,20 +35,38 @@ This project uses Scrapy framework to crawl questions and submissions from LeetC
 
 ---
 
-## LeetCode爬虫
+# LeetCode爬虫
 
-该项目使用Scrapy框架从LeetCode上爬取所有题目信息和自己的提交并生成一个markdown文件。
+该项目使用Scrapy框架从LeetCode上爬取自己的提交记录，并生成一个markdown文件。
 
-## 使用
+### 目前支持的编程语言
+
+- C++, C, Rust, Golang, C#, Swift
+- Java, Kotlin, Scala
+- Python3, Python, Ruby, JavaScript, PHP
+- MySQL
+
+### 使用
 - 进入 ./LeetCode_Crawler
-- 新建config.json，配置你的用户名和密码，参照config_template.json
+- 新建文件config.json，参照config_template.json配置你的用户名和密码，
+```
+{
+  "username": "xxxx",
+  "password": "xxxx"
+}
+```
 - ```python3 main.py```
 
-## 功能
-- 登录
-- 爬取所有题目信息
-- 爬取自己的提交
-- 生成markdown文件
+### 功能
+- 登录，爬取自己的提交记录
+- 生成一个markdown文件
+
+### 致谢
+
+- <a href="https://github.com/Excited-ccccly">Lingyun Chen</a>
+- <a href="https://github.com/Ma63d">Chuck Liu</a>
+- <a href="https://github.com/nusr/leetcode-spider">nusr/leetcode-spider</a>
+- <a href="https://gist.github.com/fyears/487fc702ba814f0da367a17a2379e8ba">fyears/leetcode_stat.py</a>
 
 ---
 

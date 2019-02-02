@@ -3,17 +3,13 @@ import time
 
 
 class LocalFile:
-    file_format = {"cpp": ".cpp", "python3": ".py",
-                   "python": ".py", "mysql": ".sql",
-                   "golang": ".go", "java": ".java",
-                   "c": ".c", "javascript": ".js",
-                   "php": ".php"}
-    language_format = {"cpp": "C++", "python3": "Python3",
-                       "python": "Python", "mysql": "MySQL",
-                       "golang": "Golang", "java": "Java",
-                       "c": "C", "javascript": "JavaScript",
-                       "php": "PHP"}
-
+    file_format = {"cpp": ".cpp", "python3": ".py", "python": ".py", "mysql": ".sql", "golang": ".go", "java": ".java",
+                   "c": ".c", "javascript": ".js", "php": ".php", "csharp": ".cs", "ruby": ".rb", "swift": ".swift",
+                   "scala": ".scl", "kotlin": ".kt", "rust": ".rs"}
+    language_format = {"cpp": "C++", "python3": "Python3", "python": "Python", "mysql": "MySQL", "golang": "Golang",
+                       "java": "Java", "c": "C", "javascript": "JavaScript", "php": "PHP", "csharp": "C#",
+                       "ruby": "Ruby", "swift": "Swift", "scala": "Scala", "kotlin": "Kotlin", "rust": "Rust"}
+    
     def __init__(self, data_set):
         self.data_set = data_set
 
