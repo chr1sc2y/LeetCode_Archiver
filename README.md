@@ -30,7 +30,7 @@ This project uses Scrapy framework to crawl questions and submissions from LeetC
 
 - <a href="https://github.com/Excited-ccccly">Lingyun Chen</a>
 - <a href="https://github.com/Ma63d">Chuck Liu</a>
-- <a href="https://github.com/nusr/leetcode-spider">nusr/leetcode-spider</a>
+- <a href="https://github.com/nusr">nusr</a>
 - <a href="https://gist.github.com/fyears/487fc702ba814f0da367a17a2379e8ba">fyears/leetcode_stat.py</a>
 
 ---
@@ -65,7 +65,7 @@ This project uses Scrapy framework to crawl questions and submissions from LeetC
 
 - <a href="https://github.com/Excited-ccccly">Lingyun Chen</a>
 - <a href="https://github.com/Ma63d">Chuck Liu</a>
-- <a href="https://github.com/nusr/leetcode-spider">nusr/leetcode-spider</a>
+- <a href="https://github.com/nusr">nusr</a>
 - <a href="https://gist.github.com/fyears/487fc702ba814f0da367a17a2379e8ba">fyears/leetcode_stat.py</a>
 
 ---
