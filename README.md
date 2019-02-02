@@ -4,7 +4,7 @@ This project uses Scrapy framework to crawl questions and submissions from LeetC
 
 ### Programming languages currently supported
 
-- C++, C, Rust, Golang, C#, Swift
+- C++, C, Rust, Golang, C#, Swift
 - Java, Kotlin, Scala
 - Python3, Python, Ruby, JavaScript, PHP
 - MySQL
