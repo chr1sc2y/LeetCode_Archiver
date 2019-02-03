@@ -110,6 +110,7 @@ class QuestionSetSpider(scrapy.Spider):
     def HandleCode(self, code):
         code = code.replace('\\u0009', '\t')
         code = code.replace('\\u000A', '\n')
+        code = code.replace('\\u0027', '\'')
         code = code.replace('\\u0022', '"')
         code = code.replace('\\u002D', '-')
         code = code.replace('\\u003C', '<')
