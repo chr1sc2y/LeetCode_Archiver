@@ -19,6 +19,8 @@ This project uses Scrapy framework to crawl questions and submissions from LeetC
   "password": "xxxx"
 }
 ```
+
+- `pip3 install Scrapy`
 - ```python3 main.py```
 
 ### Done
