@@ -84,7 +84,7 @@ class LocalFile:
     def GenerateSubmissions(self, id, submission_list):
         submissions = ""
         for language in submission_list:
-            submissions += '[' + self.language_format[language] + ']' + \
+            submissions += '[' + self.language_format[language] + '](' + \
                            self.root_path + language + "/" \
                            + str(id) + self.file_format[language] + '), '
         submissions = submissions[:-2]
