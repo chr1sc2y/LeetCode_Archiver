@@ -1,3 +1,5 @@
 .idea/
 .vscode/
 LeetCode_Crawler/config.json
+Dockerfile
+requirements.txt
