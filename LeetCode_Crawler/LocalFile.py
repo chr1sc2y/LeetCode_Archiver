@@ -9,13 +9,13 @@ class LocalFile:
     language_format = {"cpp": "C++", "python3": "Python3", "python": "Python", "mysql": "MySQL", "golang": "Golang",
                        "java": "Java", "c": "C", "javascript": "JavaScript", "php": "PHP", "csharp": "C#",
                        "ruby": "Ruby", "swift": "Swift", "scala": "Scala", "kotlin": "Kotlin", "rust": "Rust"}
-    
+
     def __init__(self, data_set):
         self.data_set = data_set
 
     def GenerateFolders(self, language_set):
         self.path = []
-        self.root_path = "../LeetCode/"
+        self.root_path = "../../LeetCode/"
         if not os.path.exists(self.root_path):
             os.makedirs(self.root_path)
         for language in language_set:
@@ -84,9 +84,8 @@ class LocalFile:
     def GenerateSubmissions(self, id, submission_list):
         submissions = ""
         for language in submission_list:
-            submissions += '[' + self.language_format[language] + '](' + \
-                           self.root_path + language + "/" \
-                           + str(id) + self.file_format[language] + '), '
+            submissions += '[' + self.language_format[language] + '](' + language + "/" + str(id) + self.file_format[
+                language] + '), '
         submissions = submissions[:-2]
         return submissions
 
