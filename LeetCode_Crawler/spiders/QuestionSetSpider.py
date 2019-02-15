@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
+import time
 import scrapy
 import requests
 from LeetCode_Crawler.items import QuestionDataItem
@@ -53,6 +54,7 @@ class QuestionSetSpider(scrapy.Spider):
             yield scrapy.FormRequest(url=question_url, callback=self.ParseQuestionData,
                                      headers=question_headers, body=question_payload)
             question_payload = question_payload.replace(title_slug, "QuestionName")
+            time.sleep(0.5)
 
     def ParseQuestionData(self, response):
         questionData = json.loads(response.text)["data"]["question"]
