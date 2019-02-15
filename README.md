@@ -20,7 +20,6 @@ This project uses Scrapy framework to crawl questions and submissions from LeetC
 }
 ```
 
-- `pip3 install Scrapy`
 - ```python3 main.py```
 
 ### Done
