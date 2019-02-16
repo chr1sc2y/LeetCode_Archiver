@@ -1,5 +1,7 @@
 .idea/
 .vscode/
-LeetCode_Crawler/config.json
+config.json
 Dockerfile
 requirements.txt
+LeetCode_Crawler/__pycache__
+LeetCode_Crawler/spiders/__pycache__

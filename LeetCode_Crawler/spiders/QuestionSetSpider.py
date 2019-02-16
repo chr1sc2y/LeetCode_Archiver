@@ -27,7 +27,7 @@ class QuestionSetSpider(scrapy.Spider):
         }
         self.session = requests.session()
         result = self.session.get(login_url)
-        file = open('./config.json', 'r')
+        file = open('../config.json', 'r')
         info = json.load(file)
         data = {"login": info["username"], "password": info["password"],
                 "csrfmiddlewaretoken": self.session.cookies['csrftoken']}
