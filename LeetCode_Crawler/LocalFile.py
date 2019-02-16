@@ -15,7 +15,7 @@ class LocalFile:
 
     def GenerateFolders(self, language_set):
         self.path = []
-        self.root_path = "../../LeetCode/"
+        self.root_path = "LeetCode/"
         if not os.path.exists(self.root_path):
             os.makedirs(self.root_path)
         for language in language_set:
