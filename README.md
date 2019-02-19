@@ -1,11 +1,11 @@
-# LeetCode Crawler
+# LeetCode Archiver
 
 This project uses Scrapy framework to crawl questions and submissions from LeetCode, and generates a markdown file. 
 
 ## Usage
 
 - all operations are done in the project root path
-- crawled submissions are store in the folder "LeetCode" 
+- download submissions are store in the folder "LeetCode" 
 
 ### How to use
 
@@ -29,7 +29,7 @@ This project uses Scrapy framework to crawl questions and submissions from LeetC
 ### Features
 
 - login
-- crawl all submissions
+- download all submissions
 - generate a markdown file
 
 ## Thanks to
@@ -81,7 +81,7 @@ This project uses Scrapy framework to crawl questions and submissions from LeetC
 
 ## Demo
 
-<p align="center"><img src="https://theme.zdassets.com/theme_assets/9008406/036323c6afd10392aa5b7e3a2eb7557d17955c81.png"></p><h3 align='center'><strong>LeetCode Solutions</strong></center></h3><p align="center">Last Updated: 2019-2-16 22:26:29</p><p align="center">Crawled by <a href = "https://github.com/ZintrulCre/LeetCode_Crawler">ZintrulCre/LeetCode_Crawler</a></p>
+<p align="center"><img src="https://theme.zdassets.com/theme_assets/9008406/036323c6afd10392aa5b7e3a2eb7557d17955c81.png"></p><h3 align='center'><strong>LeetCode Solutions</strong></center></h3><p align="center">Last Updated: 2019-2-16 22:26:29</p><p align="center">Downloaded by <a href = "https://github.com/ZintrulCre/LeetCode_Archiver">ZintrulCre/LeetCode_Archiver</a></p>
 
 | # | title | submissions | topics | difficulty | accepted rate | likes | dislikes |
 | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
