@@ -40,9 +40,9 @@ This project uses Scrapy framework to crawl questions and submissions from LeetC
 - <a href="https://gist.github.com/fyears/487fc702ba814f0da367a17a2379e8ba">fyears/leetcode_stat.py</a>
 
 
-# LeetCode爬虫
+# LeetCode归档器
 
-该项目使用Scrapy框架从LeetCode上爬取自己的提交记录，并生成一个markdown文件。
+该项目使用Scrapy框架从LeetCode上下载自己的提交记录，并生成一个markdown文件。
 
 ## 用法
 
@@ -69,7 +69,7 @@ This project uses Scrapy framework to crawl questions and submissions from LeetC
 ### 功能
 
 - 登录
-- 爬取自己的提交记录
+- 下载自己的提交记录
 - 生成一个markdown文件
 
 ### 致谢
