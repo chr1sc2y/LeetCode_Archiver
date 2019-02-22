@@ -1,6 +1,6 @@
 # LeetCode Archiver
 
-This project uses Scrapy framework to crawl questions and submissions from LeetCode, and generates a markdown file. 
+This project uses Scrapy framework to download questions and submissions from LeetCode, and generates a markdown file. 
 
 ## Usage
 
@@ -70,89 +70,6 @@ This project uses Scrapy framework to crawl questions and submissions from LeetC
 
 - 登录
 - 下载自己的提交记录
-- 生成一个markdown文件
-
-### 致谢
-
-- <a href="https://github.com/Excited-ccccly">Lingyun Chen</a>
-- <a href="https://github.com/Ma63d">Chuck Liu</a>
-- <a href="https://github.com/nusr">nusr</a>
-- <a href="https://gist.github.com/fyears/487fc702ba814f0da367a17a2379e8ba">fyears/leetcode_stat.py</a>
-
-## Demo
-
-# LeetCode Crawler
-
-This project uses Scrapy framework to crawl questions and submissions from LeetCode, and generates a markdown file. 
-
-## Usage
-
-- all operations are done in the project root path
-- crawled submissions are store in the folder "LeetCode" 
-
-### How to use
-
-- create a file config.json where you config the username and password refering to config_template.json
-```
-{
-  "username": "xxxx",
-  "password": "xxxx"
-}
-```
-- `python3 main.py`
-
-### Programming languages currently supported
-
-- C++, C, C#, Rust, Golang
-- Java, Kotlin, Scala
-- Python3, Python, Ruby, JavaScript, PHP
-- Swift
-- MySQL
-
-### Features
-
-- login
-- crawl all submissions
-- generate a markdown file
-
-## Thanks to
-
-- <a href="https://github.com/Excited-ccccly">Lingyun Chen</a>
-- <a href="https://github.com/Ma63d">Chuck Liu</a>
-- <a href="https://github.com/nusr">nusr</a>
-- <a href="https://gist.github.com/fyears/487fc702ba814f0da367a17a2379e8ba">fyears/leetcode_stat.py</a>
-
-
-# LeetCode爬虫
-
-该项目使用Scrapy框架从LeetCode上爬取自己的提交记录，并生成一个markdown文件。
-
-## 用法
-
-### 使用
-
-- 新建config.json文件，参照config_template.json配置用户名和密码，
-```
-{
-  "username": "xxxx",
-  "password": "xxxx"
-}
-```
-
-- ```python3 main.py```
-
-### 目前支持的编程语言
-
-- C++, C, C#, Rust, Golang
-- Java, Kotlin, Scala
-- Python3, Python, Ruby, JavaScript, PHP
-- Swift
-- MySQL
-
-### 功能
-
-- 登录
-- 爬取自己的提交记录
 - 生成一个markdown文件
 
 ### 致谢
