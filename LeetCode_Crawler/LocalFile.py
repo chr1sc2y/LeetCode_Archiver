@@ -34,7 +34,7 @@ class LocalFile:
             "<h3 align='center'><strong>LeetCode Solutions</strong></center></h3>")
         file.write('<p align="center">Last Updated: ' + time + '</p>')
         file.write(
-            '<p align="center">Crawled by <a href = "https://github.com/ZintrulCre/LeetCode_Crawler">ZintrulCre/LeetCode_Crawler</a></p>\n\n')
+            '<p align="center">Downloaded by <a href = "https://github.com/ZintrulCre/LeetCode_Archiver">ZintrulCre/LeetCode_Archiver</a></p>\n\n')
 
         file.write(
             '| # | title | submissions | topics | difficulty | accepted rate | likes | dislikes |\n')
