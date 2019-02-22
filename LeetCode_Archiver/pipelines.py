@@ -6,6 +6,7 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 from LeetCode_Archiver.LocalFile import LocalFile
+from LeetCode_Archiver.Statistic import Statistic
 
 
 class QuestionDataPipeline(object):
@@ -23,6 +24,6 @@ class QuestionDataPipeline(object):
                 self.language_set.add(language)
 
     def close_spider(self, spider):
-        local_file = LocalFile(self.data_set)
-        local_file.GenerateFolders(self.language_set)
-        local_file.GenerateFiles()
+        LocalFile(self.data_set, self.language_set).GenerateFiles()
+        statistic = Statistic(self.data_set, self.language_se)
+        statistic.TopicRatio()

@@ -10,21 +10,25 @@ class LocalFile:
                        "java": "Java", "c": "C", "javascript": "JavaScript", "php": "PHP", "csharp": "C#",
                        "ruby": "Ruby", "swift": "Swift", "scala": "Scala", "kotlin": "Kotlin", "rust": "Rust"}
 
-    def __init__(self, data_set):
+    def __init__(self, data_set, language_set):
         self.data_set = data_set
+        self.language_set = language_set
 
-    def GenerateFolders(self, language_set):
+    def GenerateFolders(self):
         self.path = []
         self.root_path = "LeetCode/"
         if not os.path.exists(self.root_path):
             os.makedirs(self.root_path)
-        for language in language_set:
+        for language in self.language_set:
             self.path.append(self.root_path + language + "/")
         for path in self.path:
             if not os.path.exists(path):
                 os.makedirs(path)
 
     def GenerateFiles(self):
+        # generate folders
+        self.GenerateFolders()
+
         # generate md file head
         time = self.GetTime()
         file = open(self.root_path + 'README.md', 'w')
