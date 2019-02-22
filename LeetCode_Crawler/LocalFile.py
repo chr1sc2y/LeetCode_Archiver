@@ -44,17 +44,15 @@ class LocalFile:
         questions = sorted(self.data_set, key=lambda x: x["id"], reverse=True)
         for question in questions:
             # generate local file, submissions, topics
-            self.GenerateSolutionFile(
-                question["id"], question["submission_list"])
-            submissions = self.GenerateSubmissions(
-                question["id"], question["submission_list"])
+            self.GenerateSolutionFile(question["id"], question["submission_list"])
+            submissions = self.GenerateSubmissions(question["id"], question["submission_list"])
             if submissions == "":
                 continue
             topics = self.GenerateTopics(question["topics"])
             title = self.GenerateTitle(question["title"], question["slug"])
 
             # generate md file
-            file.writelines(['| ', str(question["id"]), ' | ', str(question["title"]), ' | ' + submissions + ' | ',
+            file.writelines(['| ', str(question["id"]), ' | ', title, ' | ' + submissions + ' | ',
                              str(topics), ' | ', str(question["difficulty"]), ' | ', str(
                     question["ac_rate"]),
                              ' | ', str(question["likes"]), ' | ', str(question["dislikes"]), '\n'])
