@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for LeetCode_Crawler project
+# Scrapy settings for LeetCode_Archiver project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,13 +9,13 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'LeetCode_Crawler'
+BOT_NAME = 'LeetCode_Archiver'
 
-SPIDER_MODULES = ['LeetCode_Crawler.spiders']
-NEWSPIDER_MODULE = 'LeetCode_Crawler.spiders'
+SPIDER_MODULES = ['LeetCode_Archiver.spiders']
+NEWSPIDER_MODULE = 'LeetCode_Archiver.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = 'LeetCode_Crawler (+http://www.yourdomain.com)'
+# USER_AGENT = 'LeetCode_Archiver (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -46,13 +46,13 @@ ROBOTSTXT_OBEY = False
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    'LeetCode_Crawler.middlewares.LeetcodeSpiderSpiderMiddleware': 543,
+#    'LeetCode_Archiver.middlewares.LeetcodeSpiderSpiderMiddleware': 543,
 # }
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
-#    'LeetCode_Crawler.middlewares.LeetcodeSpiderDownloaderMiddleware': 543,
+#    'LeetCode_Archiver.middlewares.LeetcodeSpiderDownloaderMiddleware': 543,
 # }
 
 # Enable or disable extensions
@@ -65,7 +65,7 @@ ROBOTSTXT_OBEY = False
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 # custom_settings = {
 #     'ITEM_PIPELINES': {
-#         'LeetCode_Crawler.pipelines.QuestionDataPipeline': 1
+#         'LeetCode_Archiver.pipelines.QuestionDataPipeline': 1
 #     }
 # }
 

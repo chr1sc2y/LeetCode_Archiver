@@ -3,5 +3,5 @@
 config.json
 Dockerfile
 requirements.txt
-LeetCode_Crawler/__pycache__
-LeetCode_Crawler/spiders/__pycache__
+LeetCode_Archiver/__pycache__
+LeetCode_Archiver/spiders/__pycache__
