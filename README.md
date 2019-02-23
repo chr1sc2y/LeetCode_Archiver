@@ -91,11 +91,11 @@ This project uses Scrapy framework to download questions and submissions from Le
 
 | # | title | submissions | topics | difficulty | accepted rate | likes | dislikes |
 | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
-| 995 | [Minimum Number of K Consecutive Bit Flips](https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips/) | [C++](cpp/995.cpp) | Array | Hard | 51.3% | 72 | 16
-| 994 | [Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) | [C++](cpp/994.cpp) | Breadth-first Search | Easy | 46.7% | 97 | 5
-| 993 | [Cousins in Binary Tree](https://leetcode.com/problems/cousins-in-binary-tree/) | [C++](cpp/993.cpp) | Tree | Easy | 54.1% | 54 | 3
-| 991 | [Broken Calculator](https://leetcode.com/problems/broken-calculator/) | [Python3](python3/991.py), [C++](cpp/991.cpp), [Python](python/991.py), [Java](java/991.java), [C](c/991.c), [Golang](golang/991.go) | Math | Medium | 37.8% | 76 | 36
-| 990 | [Satisfiability of Equality Equations](https://leetcode.com/problems/satisfiability-of-equality-equations/) | [C++](cpp/990.cpp), [Python3](python3/990.py) | Graph | Medium | 38.1% | 115 | 1
-| 989 | [Add to Array-Form of Integer](https://leetcode.com/problems/add-to-array-form-of-integer/) | [Python3](python3/989.py), [C++](cpp/989.cpp) | Array | Easy | 44.9% | 52 | 8
-| 988 | [Smallest String Starting From Leaf](https://leetcode.com/problems/smallest-string-starting-from-leaf/) | [Python3](python3/988.py), [C++](cpp/988.cpp) | Tree | Medium | 52.4% | 69 | 3
-| 987 | [Vertical Order Traversal of a Binary Tree](https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/) | [C++](cpp/987.cpp) | Hash Table, Tree | Medium | 33.4% | 56 | 98
+| 995 | [Minimum Number of K Consecutive Bit Flips](https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips/) | [C++](LeetCode/cpp/995.cpp) | Array | Hard | 51.3% | 72 | 16
+| 994 | [Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) | [C++](LeetCode/cpp/994.cpp) | Breadth-first Search | Easy | 46.7% | 97 | 5
+| 993 | [Cousins in Binary Tree](https://leetcode.com/problems/cousins-in-binary-tree/) | [C++](LeetCode/cpp/993.cpp) | Tree | Easy | 54.1% | 54 | 3
+| 991 | [Broken Calculator](https://leetcode.com/problems/broken-calculator/) | [Python3](LeetCode/python3/991.py), [C++](LeetCode/cpp/991.cpp), [Python](LeetCode/python/991.py), [Java](LeetCode/java/991.java), [C](LeetCode/c/991.c), [Golang](LeetCode/golang/991.go) | Math | Medium | 37.8% | 76 | 36
+| 990 | [Satisfiability of Equality Equations](https://leetcode.com/problems/satisfiability-of-equality-equations/) | [C++](LeetCode/cpp/990.cpp), [Python3](LeetCode/python3/990.py) | Graph | Medium | 38.1% | 115 | 1
+| 989 | [Add to Array-Form of Integer](https://leetcode.com/problems/add-to-array-form-of-integer/) | [Python3](LeetCode/python3/989.py), [C++](LeetCode/cpp/989.cpp) | Array | Easy | 44.9% | 52 | 8
+| 988 | [Smallest String Starting From Leaf](https://leetcode.com/problems/smallest-string-starting-from-leaf/) | [Python3](LeetCode/python3/988.py), [C++](LeetCode/cpp/988.cpp) | Tree | Medium | 52.4% | 69 | 3
+| 987 | [Vertical Order Traversal of a Binary Tree](https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/) | [C++](LeetCode/cpp/987.cpp) | Hash Table, Tree | Medium | 33.4% | 56 | 98
