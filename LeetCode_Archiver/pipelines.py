@@ -24,6 +24,5 @@ class QuestionDataPipeline(object):
                 self.language_set.add(language)
 
     def close_spider(self, spider):
-        LocalFile(self.data_set, self.language_set).GenerateFiles()
-        statistic = Statistic(self.data_set, self.language_se)
-        statistic.TopicRatio()
+        LocalFile(self.data_set, self.language_set)
+        Statistic(self.data_set, self.language_se)
