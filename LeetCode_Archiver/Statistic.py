@@ -29,11 +29,15 @@ class Statistic:
         colors = cm.rainbow(np.arange(len(labels)) / len(labels))
 
         # plot
-        fig, axes = plt.subplots(figsize=(14, 6))
+        fig, axes = plt.subplots(figsize=(24, 8))
         index = np.arange(len(counts))
         height = counts
 
-        plt.bar(index, height, width=0.4, tick_label=labels, color=colors)
+        bar = plt.bar(index, height, width=0.4, tick_label=labels, color=colors)
+        plt.xticks(index, labels, size='medium', rotation=20)
+        for rect in bar:
+            height = rect.get_height()
+            plt.text(rect.get_x() + rect.get_width() / 2.0, 1.01 * height, '%d' % int(height), ha='center', va='bottom')
 
         plt.xlabel("topics")
         plt.ylabel("numbers")
@@ -61,26 +65,20 @@ class Statistic:
         colors = cm.rainbow(np.arange(len(labels)) / len(labels))
 
         # plot
-        fig, axe = plt.subplots(figsize=(24, 24))
+        fig, axes = plt.subplots(figsize=(16, 8))
+        index = np.arange(len(counts))
+        height = counts
 
-        def make_autopct(values):
-            def my_autopct(pct):
-                total = sum(values)
-                val = int(round(pct * total / 100.0))
-                return '{p:.2f}% ({v:d})'.format(p=pct, v=val)
+        bar = plt.bar(index, height, width=0.4, tick_label=labels, color=colors)
+        plt.xticks(index, labels, size='medium')
+        for rect in bar:
+            height = rect.get_height()
+            plt.text(rect.get_x() + rect.get_width() / 2.0, 1.01 * height, '%d' % int(height), ha='center', va='bottom')
 
-            return my_autopct
-
-        patches, texts, autotexts = axe.pie(counts, labels=labels, colors=colors, autopct=make_autopct(counts),
-                                            startangle=90, counterclock=False)
-
-        # font
-        proptease = fm.FontProperties()
-        proptease.set_size('xx-large')
-        plt.setp(autotexts, fontproperties=proptease)
-        plt.setp(texts, fontproperties=proptease)
-
+        plt.xlabel("topics")
+        plt.ylabel("numbers")
         plt.title("submissions by language")
+
         plt.savefig('LeetCode/LanguageFigure.png')
         plt.show()
 
