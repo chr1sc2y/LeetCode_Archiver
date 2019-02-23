@@ -25,4 +25,4 @@ class QuestionDataPipeline(object):
 
     def close_spider(self, spider):
         LocalFile(self.data_set, self.language_set)
-        Statistic(self.data_set, self.language_se)
+        Statistic(self.data_set)

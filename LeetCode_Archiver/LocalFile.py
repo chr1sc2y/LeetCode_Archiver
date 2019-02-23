@@ -39,6 +39,10 @@ class LocalFile:
         file.write(
             '<p align="center">Downloaded by <a href = "https://github.com/ZintrulCre/LeetCode_Archiver">ZintrulCre/LeetCode_Archiver</a></p>\n\n')
 
+        file.write('<p align="center"><img src="TopicFigure.png"></p>')
+        file.write('<p align="center"><img src="LanguageFigure.png"></p>')
+        file.write('<p align="center"><img src="DifficultyFigure.png"></p>')
+
         file.write(
             '| # | title | submissions | topics | difficulty | accepted rate | likes | dislikes |\n')
         file.write(
