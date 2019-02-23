@@ -5,4 +5,3 @@ Dockerfile
 requirements.txt
 LeetCode_Archiver/__pycache__
 LeetCode_Archiver/spiders/__pycache__
-LeetCode_Archiver/LocalFileBackup.py

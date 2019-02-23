@@ -13,8 +13,8 @@ class LocalFile:
     def __init__(self, data_set, language_set):
         self.data_set = data_set
         self.language_set = language_set
-        self.GenerateFiles()
         self.GenerateFolders()
+        self.GenerateFiles()
 
     def GenerateFolders(self):
         self.path = []
