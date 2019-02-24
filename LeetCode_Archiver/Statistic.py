@@ -24,7 +24,18 @@ class Statistic:
         labels = []
         counts = []
         for label, count in topics:
-            labels.append(label)
+            if label == 'Dynamic Programming':
+                labels.append("DP")
+            elif label == "Depth-first Search":
+                labels.append("DFS")
+            elif label == "Breadth-first Search":
+                labels.append("BFS")
+            elif label == "Bit Manipulation":
+                labels.append("Bit")
+            elif label == "Divide and Conquer":
+                labels.append("Divide&Conquer")
+            else:
+                labels.append(label)
             counts.append(count)
         colors = cm.rainbow(np.arange(len(labels)) / len(labels))
 
