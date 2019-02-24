@@ -25,10 +25,20 @@ Download personal submissions on LeetCode, generate summary figures and a markdo
 - Swift
 - MySQL
 
-### Features
+### Feature
 
 - download personal submissions on LeetCode
 - generate summary figures and a markdown file
+
+### Implementation
+
+- python3
+  - os
+  - time
+  - json
+- Scrapy
+- numpy
+- matplotlib
 
 ## Thanks to
 
