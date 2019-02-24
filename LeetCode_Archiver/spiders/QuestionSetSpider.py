@@ -52,9 +52,9 @@ class QuestionSetSpider(scrapy.Spider):
             title_slug = question["stat"]["question__title_slug"]
 
             # filter unsolved questions
-            submission_list = self.GetSubmissionList(title_slug)
-            if (len(submission_list) == 0):
-                continue
+            # submission_list = self.GetSubmissionList(title_slug)
+            # if (len(submission_list) == 0):
+            #     continue
 
             question_payload = question_payload.replace("QuestionName", title_slug)
             yield scrapy.FormRequest(url=question_url, callback=self.ParseQuestionData,

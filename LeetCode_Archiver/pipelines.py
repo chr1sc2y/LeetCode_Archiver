@@ -18,6 +18,8 @@ class QuestionDataPipeline(object):
     def process_item(self, item, spider):
         data = dict(item)
         data["id"] = int(data["id"])
+        if len(data["submission_list"]) == 0:
+            return
         self.data_set.append(data)
         for language in data["submission_list"].keys():
             if language not in self.language_set:
