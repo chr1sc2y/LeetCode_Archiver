@@ -1,21 +1,11 @@
 class Solution:
-    def lengthOfLIS(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        size = len(nums)
-        seq = [nums[0]] if size > 0 else []
-        for i in range(1, size):
-            x, y = 0, len(seq)
-            while(x < y):
-                mid = x + (y-x) // 2
-                if nums[i] > seq[mid]:
-                    x = mid + 1
-                else:
-                    y = mid
-            if y == len(seq):
-                seq.append(nums[i])
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        dp = []
+        for i in range(len(nums)):
+            for j in range(len(dp)):
+                if nums[i] <= dp[j]:
+                    dp[j] = nums[i]
+                    break
             else:
-                seq[y] = nums[i]
-        return len(seq)
+                dp.append(nums[i])
+        return len(dp)
