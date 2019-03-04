@@ -39,9 +39,12 @@ class LocalFile:
         file.write(
             '<p align="center">Downloaded by <a href = "https://github.com/ZintrulCre/LeetCode_Archiver">ZintrulCre/LeetCode_Archiver</a></p>\n\n')
 
-        file.write('<p align="center"><img src="TopicFigure.png"></p>\n\n')
-        file.write('<p align="center"><img src="LanguageFigure.png"></p>\n\n')
-        file.write('<p align="center"><img src="DifficultyFigure.png"></p>\n\n')
+        # file.write('<p align="center"><img src="TopicFigure.png"></p>\n\n')
+        # file.write('<p align="center"><img src="LanguageFigure.png"></p>\n\n')
+        # file.write('<p align="center"><img src="DifficultyFigure.png"></p>\n\n')
+        file.write('<p align="center"><img src="LeetCode/TopicFigure.png"></p>\n\n')
+        file.write('<p align="center"><img src="LeetCode/LanguageFigure.png"></p>\n\n')
+        file.write('<p align="center"><img src="LeetCode/DifficultyFigure.png"></p>\n\n')
 
         file.write(
             '| # | title | submissions | topics | difficulty | accepted rate | likes | dislikes |\n')
@@ -89,8 +92,10 @@ class LocalFile:
     def GenerateSubmissions(self, id, submission_list):
         submissions = ""
         for language in submission_list:
-            submissions += '[' + self.language_format[language] + '](' + language + "/" + str(id) + self.file_format[
+            submissions += '[' + self.language_format[language] + '](LeetCode/' + language + "/" + str(id) + self.file_format[
                 language] + '), '
+            # submissions += '[' + self.language_format[language] + '](' + language + "/" + str(id) + self.file_format[
+            #     language] + '), '
         submissions = submissions[:-2]
         return submissions
 
