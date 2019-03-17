@@ -1,29 +1,40 @@
 class NumArray {
+    vector<int> array;
 public:
     NumArray(vector<int> nums) {
-        num = nums;
         int n = nums.size();
-        query.push_back(0);
-        for (int i = 0; i < n; ++i)
-            query.push_back(nums[i] + query[i]);
-        for (int i = 0; i < n; ++i)
-            dif.push_back(0);
+        array = vector<int>(2 * n, 0);
+        for (int i = n, j = 0; i < 2 * n; ++i, ++j)
+            array[i] = nums[j];
+        for (int i = n - 1; i > 0; --i)
+            array[i] = array[i * 2] + array[i * 2 + 1];
     }
 
     void update(int i, int val) {
-        dif[i] = val - num[i];
+        i += array.size() / 2;
+        int prev = array[i];
+        while (i > 0) {
+            array[i] += val - prev;
+            i /= 2;
+        }
     }
-
 
     int sumRange(int i, int j) {
-        int sum = query[j + 1] - query[i];
-        for (int k = i; k <= j; ++k)
-            sum += dif[k];
+        int sum = 0;
+        i += array.size() / 2;
+        j += array.size() / 2;
+        while (i <= j) {
+            if (i % 2 == 1) {
+                sum += array[i];
+                ++i;
+            }
+            if (j % 2 == 0) {
+                sum += array[j];
+                --j;
+            }
+            i /= 2;
+            j /= 2;
+        }
         return sum;
     }
-
-private:
-    vector<int> num;
-    vector<int> query;
-    vector<int> dif;
 };
