@@ -32,11 +32,9 @@ Download personal submissions on LeetCode, generate summary figures and a markdo
 
 ### Implementation
 
-- python3
-  - os
-  - time
-  - json
+- Python3
 - Scrapy
+- requests
 - numpy
 - matplotlib
 
