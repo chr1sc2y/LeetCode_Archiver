@@ -33,7 +33,7 @@ class Statistic:
             elif label == "Bit Manipulation":
                 labels.append("Bit")
             elif label == "Divide and Conquer":
-                labels.append("Divide&Conquer")
+                labels.append("DivideConquer")
             else:
                 labels.append(label)
             counts.append(count)
