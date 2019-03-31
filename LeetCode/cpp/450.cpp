@@ -1,53 +1,69 @@
 class Solution {
 public:
     TreeNode *deleteNode(TreeNode *root, int key) {
-        auto node = root;
-        if (node && node->val == key) {
-            if (!node->left)
-                return node->right;
-            else if (!node->right)
-                return node->left;
-            auto temp = node->left;
-            auto right_most = temp;
-            while (right_most->right)
-                right_most = right_most->right;
-            right_most->right = node->right;
-            delete node;
-            return temp;
+        if (!root)
+            return nullptr;
+        auto ret = root;
+        if (root->val == key) {
+            if (!root->right)
+                return root->left;
+            else if (!root->left)
+                return root->right;
+            auto right_left = root->right;
+            while (right_left->left)
+                right_left = right_left->left;
+            right_left->left = root->left->right;
+            root->left->right = root->right;
+            return root->left;
         }
-        while (node) {
-            if (node->left && node->left->val == key) {
-                auto temp = node->left;
-                if (!temp->left) {
-                    node->left = temp->right;
-                    break;
+        auto prev = root;
+        while (root) {
+            if (root->val < key) {
+                prev = root;
+                root = root->right;
+            } else if (root->val > key) {
+                prev = root;
+                root = root->left;
+            } else {
+                if (root == prev->left) {
+                    if (!root->left && !root->right) {
+                        prev->left = nullptr;
+                        return ret;
+                    } else if (!root->left) {
+                        prev->left = root->right;
+                        return ret;
+                    } else if (!root->right) {
+                        prev->left = root->left;
+                        return ret;
+                    }
+                    auto right_left = root->right;
+                    while (right_left->left)
+                        right_left = right_left->left;
+                    right_left->left = root->left->right;
+                    root->left->right = root->right;
+                    prev->left = root->left;
+                    return ret;
+                } else {
+                    if (!root->left && !root->right) {
+                        prev->right = nullptr;
+                        return ret;
+                    } else if (!root->left) {
+                        prev->right = root->right;
+                        return ret;
+                    } else if (!root->right) {
+                        prev->right = root->left;
+                        return ret;
+                    }
+                    auto right_left = root->right;
+                    while (right_left->left)
+                        right_left = right_left->left;
+                    right_left->left = root->left->right;
+                    root->left->right = root->right;
+                    prev->right = root->left;
+                    return ret;
                 }
-                node->left = temp->left;
-                auto right_most = temp->left;
-                while (right_most->right)
-                    right_most = right_most->right;
-                right_most->right = temp->right;
-                delete temp;
-                break;
-            } else if (node->right && node->right->val == key) {
-                auto temp = node->right;
-                if (!temp->right) {
-                    node->right = temp->left;
-                    break;
-                }
-                node->right = temp->right;
-                auto left_most = temp->right;
-                while (left_most->left)
-                    left_most = left_most->left;
-                left_most->left = temp->left;
-                delete temp;
-                break;
-            } else if (node->val > key)
-                node = node->left;
-            else
-                node = node->right;
-
+            }
         }
-        return root;
+        return ret;
     }
 };

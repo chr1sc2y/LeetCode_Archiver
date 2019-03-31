@@ -1,14 +1,20 @@
 class Solution {
 public:
-    int numPairsDivisibleBy60(vector<int> &time) {
-        unordered_map<int, int> match;
-        int total = 0, n = time.size();
-        for (auto &t:time) {
-            int target = (60 - t % 60) % 60;
-            if (match.find(target) != match.end())
-                total += match[target];
-            ++match[t % 60];
+    bool canThreePartsEqualSum(vector<int>& A) {
+        int sum = 0, n = A.size();
+        for (int i = 0; i < n; ++i)
+            sum += A[i];
+        if (sum % 3 != 0)
+            return false;
+        int part = 0, cum = 0;
+        sum /= 3;
+        for (int i = 0; i < n; ++i) {
+            cum += A[i];
+            if (cum == sum) {
+                ++part;
+                cum = 0;
+            }
         }
-        return total;
+        return (part == 3 && cum == 0);
     }
 };
