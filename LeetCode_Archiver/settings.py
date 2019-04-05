@@ -90,6 +90,7 @@ ROBOTSTXT_OBEY = False
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
+LOG_FILE = "./.log"
 
 mongo_host = '127.0.0.1'
 mongo_port = 27017

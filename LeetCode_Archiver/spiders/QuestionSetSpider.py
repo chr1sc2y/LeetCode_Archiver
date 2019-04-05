@@ -32,7 +32,6 @@ class QuestionSetSpider(scrapy.Spider):
         data = {"login": info["username"], "password": info["password"],
                 "csrfmiddlewaretoken": self.session.cookies['csrftoken']}
         self.session.post(login_url, data=data, headers=login_headers)
-        print("login info: " + str(result))
 
     def start_requests(self):
         self.Login()
@@ -60,6 +59,7 @@ class QuestionSetSpider(scrapy.Spider):
             yield scrapy.FormRequest(url=question_url, callback=self.ParseQuestionData,
                                      headers=question_headers, body=question_payload)
             question_payload = question_payload.replace(title_slug, "QuestionName")
+            print("Downloading " + str(question["stat"]["frontend_question_id"]) + ' ' + question["stat"]["question__title"])
             time.sleep(0.3)
 
     def ParseQuestionData(self, response):
@@ -99,6 +99,8 @@ class QuestionSetSpider(scrapy.Spider):
         submissions = json.loads(submissions.text)
         submission_list = {}
         submissions = submissions["data"]["submissionList"]["submissions"]
+        if submissions is None:
+            return None
         for submission in submissions:
             status = submission["statusDisplay"]
             if status == "Accepted":
