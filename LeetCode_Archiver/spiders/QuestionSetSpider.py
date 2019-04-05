@@ -60,7 +60,7 @@ class QuestionSetSpider(scrapy.Spider):
                                      headers=question_headers, body=question_payload)
             question_payload = question_payload.replace(title_slug, "QuestionName")
             print("Downloading " + str(question["stat"]["frontend_question_id"]) + ' ' + question["stat"]["question__title"])
-            time.sleep(0.3)
+            time.sleep(0.4)
 
     def ParseQuestionData(self, response):
         questionData = json.loads(response.text)["data"]["question"]
