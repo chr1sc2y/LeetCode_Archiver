@@ -1,11 +1,19 @@
 class Solution {
 public:
-    int maxScoreSightseeingPair(vector<int> &A) {
-        int prev = A[0] + 0, curr = INT_MIN;
-        for (int i = 1; i < A.size(); ++i) {
-            curr = max(curr, A[i] - i + prev);
-            prev = max(prev, A[i] + i);
+    string removeOuterParentheses(string S) {
+        string ret;
+        int empty = 0, start = 0;
+        for (int i = 0; i < S.size(); ++i) {
+            char c = S[i];
+            if (c == '(')
+                ++empty;
+            else if (c == ')')
+                --empty;
+            if (empty == 0) {
+                ret += S.substr(start + 1, i - start - 1);
+                start = i + 1;
+            }
         }
-        return curr;
+        return ret;
     }
 };

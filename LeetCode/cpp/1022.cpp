@@ -1,13 +1,20 @@
 class Solution {
+    int mod = static_cast<int>(pow(10, 9) + 7);
 public:
-    int smallestRepunitDivByK(int K) {
-        int n = 0;
-        for (int i = 1; i <= K; ++i) {
-            n = n * 10 + 1;
-            n %= K;
-            if (n == 0)
-                return i;
-        }
-        return -1;
+    int sumRootToLeaf(TreeNode *root) {
+        if (!root)
+            return 0;
+        return Sum(root, 0);
+    }
+
+    int Sum(TreeNode *node, int &&curr) {
+        int sum = 0;
+        if (!node->left && !node->right)
+            return curr * 2 + node->val % mod;
+        if (node->left)
+            sum += Sum(node->left, curr * 2 + node->val % mod);
+        if (node->right)
+            sum += Sum(node->right, curr * 2 + node->val % mod);
+        return sum;
     }
 };
