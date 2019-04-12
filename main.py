@@ -1,13 +1,12 @@
 import os
-import time
+os.system('sh ./requirements.sh')
 
+import time
 start = time.time()
 
-os.system('sh ./requirements.sh')
+from scrapy import cmdline
 if os.path.exists("./.log"):
     os.remove("./.log")
-
-from scrapy import cmdline
 cmdline.execute("scrapy crawl QuestionSetSpider".split())
 
 end = time.time()
