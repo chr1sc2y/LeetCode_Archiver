@@ -1,23 +1,22 @@
 class Solution {
 public:
-    vector<bool> camelMatch(vector<string> &queries, string pattern) {
-        int m = pattern.size();
+    vector<bool> camelMatch(vector<string> &queries, string &pattern) {
         vector<bool> ret;
-        for (auto &string:queries) {
-            bool flag = true;
-            int j = 0;
-            for (int i = 0; i < string.size(); ++i) {
-                char c = string[i];
-                if (c <= 'Z') {
-                    if (j >= m || c != pattern[j]) {
-                        flag = false;
+        int n = pattern.size();
+        for (auto &query:queries) {
+            bool res = true;
+            int i = 0;
+            for (auto &q:query) {
+                if (q < 'Z') {
+                    if (i >= n || q != pattern[i]) {
+                        res = false;
                         break;
                     }
-                    ++j;
-                } else if (c == pattern[j])
-                    ++j;
+                    ++i;
+                } else if (q == pattern[i])
+                    ++i;
             }
-            ret.push_back(flag && j == m);
+            ret.push_back(res && i == n);
         }
         return ret;
     }
