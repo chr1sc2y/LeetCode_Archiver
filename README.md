@@ -1,5 +1,3 @@
-维护中，暂时用不了
-
 # LeetCode Archiver
 
 [![Build Status](https://travis-ci.com/ZintrulCre/LeetCode_Archiver.svg?branch=master)](https://travis-ci.com/ZintrulCre/LeetCode_Archiver)
